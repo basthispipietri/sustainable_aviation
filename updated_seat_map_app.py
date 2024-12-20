@@ -1,6 +1,4 @@
-
 import random
-import matplotlib.pyplot as plt
 import streamlit as st
 from matplotlib.figure import Figure
 
@@ -56,7 +54,7 @@ def draw_seat_map_with_barycenter(seat_map, barycenter):
                 else:  # Right of the aisle
                     x_position = col_index + 1
 
-                ax.add_patch(plt.Rectangle((x_position, y_start - row_index), 1, 1, color="white", ec="black"))
+                ax.add_patch(Figure().add_subplot(111).patches)
                 if seat != " ":
                     ax.text(x_position + 0.5, y_start - row_index + 0.5, f"{seat}kg", 
                             va="center", ha="center", fontsize=8)
@@ -67,7 +65,7 @@ def draw_seat_map_with_barycenter(seat_map, barycenter):
                 va="center", ha="right", fontsize=10, color="black")
     
     for row_index in range(-1, economy_y_start - len(seat_map['Economy']) - 1, -1):
-        ax.add_patch(plt.Rectangle((3, row_index), 1, 1, color="gray", alpha=0.1))
+        ax.add_patch(Figure().add_subplot(111).patches)
     
     ax.set_xlim(-2, 8)
     ax.set_ylim(economy_y_start - len(seat_map['Economy']) - 1, 2)
@@ -101,3 +99,4 @@ if __name__ == "__main__":
     st.write(f"### Barycenter: ({barycenter[0]:.2f}, {barycenter[1]:.2f})")
     fig = draw_seat_map_with_barycenter(seat_map_with_weights, barycenter)
     st.pyplot(fig)
+
